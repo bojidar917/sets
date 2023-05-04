@@ -19,7 +19,7 @@ public:
     Set operator-(const Set &rhSet) const;
     Set &operator+=(const Set &rhSet); // return this at the end
     Set &operator-=(const Set &rhSet); // again return this at the end
-    int operator[](const size_t check);
+    int operator[](const size_t index) const;
     bool operator>(const Set &set) const;
     bool operator==(const Set &rhSet) const;
 
@@ -33,7 +33,6 @@ private:
     unsigned capacity;
     void setSize(int size);
     void setCapacity(int capacity);
-    int calcSize();
     void resize();
 
     void destroy();

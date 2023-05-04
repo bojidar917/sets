@@ -17,7 +17,10 @@ Set::Set(const Set &other)
 {
     this->set = other.set;
     this->capacity = other.capacity;
-    this->size = other.size;
+    for (int i = 0; i < other.size; i++)
+    {
+        set[i] = other.set[i];
+    }
 }
 
 Set &Set::operator=(const Set &other)
@@ -67,10 +70,6 @@ Set Set::operator+(const Set &rhSet) const
     return newSet;
 }
 
-Set Set::operator-(const Set &rhSet) const
-{
-}
-
 Set &Set::operator+=(const Set &rhSet)
 {
     int *temp = new int[this->size + rhSet.size];
@@ -94,14 +93,36 @@ Set &Set::operator+=(const Set &rhSet)
     return *this;
 }
 
-Set &Set::operator-=(const Set &rhSet)
+Set Set::operator-(const Set &rhSet) const
 {
-    // TODO: insert return statement here
+    Set newSet;
+    newSet += *this;
+    newSet -= rhSet;
+    return newSet;
 }
 
-int Set::operator[](const size_t check)
+Set &Set::operator-=(const Set &rhSet)
 {
-    return 0;
+    int *temp = new int[this->size - rhSet.size];
+    int tempCounter = 0;
+    for (int i = 0; i < this->size; i++)
+    {
+        if (this->set[i] != rhSet.set[i])
+        {
+            temp[tempCounter] = this->set[i];
+        }
+    }
+
+    delete[] this->set; // free previously allocated memory
+    this->set = temp;
+    this->size = this->size - rhSet.size;
+
+    return *this;
+}
+
+int Set::operator[](const size_t index) const
+{
+    return this->set[index];
 }
 
 bool Set::operator>(const Set &set) const
@@ -143,11 +164,6 @@ void Set::setCapacity(int capacity)
         capacity = 0;
 
     this->capacity = capacity;
-}
-
-int Set::calcSize()
-{
-    return 0;
 }
 
 void Set::resize()
