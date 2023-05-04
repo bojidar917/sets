@@ -27,11 +27,11 @@ Set &Set::operator=(const Set &other)
         delete[] set;
         this->capacity = other.capacity;
         this->size = other.size;
-        this->set = other.set;
-        // for (int i = 0; i < other.size; i++)
-        // {
-        //     set[i] = other.set[i];
-        // }
+        // this->set = other.set;
+        for (int i = 0; i < other.size; i++)
+        {
+            set[i] = other.set[i];
+        }
     }
 
     return *this;
