@@ -28,7 +28,7 @@ int main()
 
     std::cout << std::endl;
 
-    //-----the commented code below doesn't do work properly, when the program reaches it freeze and then stops working-----
+    //-----The code that was commented out is causing the program to freeze and stop working properly
     // set3 = set1 + set2; // TODO: when the compiler hits here stops
     // std::cout << "printing set3 = set1 + set2 + something else..." << std::endl;
     // set3.print();
