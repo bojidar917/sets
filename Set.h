@@ -3,11 +3,12 @@ class Set
 {
 public:
     Set();
-    Set(int *set, int size);
     Set(const Set &other);
     Set &operator=(const Set &other);
     Set(Set &&other);
     ~Set();
+
+    void setRange(int start, int end);
 
     int *getSet() const { return set; }
     int getSize() { return size; }

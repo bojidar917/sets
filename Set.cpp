@@ -6,13 +6,6 @@ Set::Set()
 {
 }
 
-Set::Set(int *set, int size)
-    : set(set), size(size)
-{
-    setSize(size);
-    this->capacity = size * 2;
-}
-
 Set::Set(const Set &other)
 {
     this->set = other.set;
@@ -54,6 +47,19 @@ Set::Set(Set &&other)
 Set::~Set()
 {
     destroy();
+}
+
+void Set::setRange(int start, int end)
+{
+    int setIndexCounter = 0;
+    this->size = end - start;
+
+    for (int i = start; i < end; i++)
+    {
+        this->set[setIndexCounter] = i;
+        setIndexCounter++;
+    }
+    this->capacity = 2 * this->size;
 }
 
 void Set::setSet(int *set)
@@ -101,21 +107,39 @@ Set Set::operator-(const Set &rhSet) const
     return newSet;
 }
 
+// TODO: doesn't work properly
 Set &Set::operator-=(const Set &rhSet)
 {
-    int *temp = new int[this->size - rhSet.size];
+    int *temp = new int[this->size];
     int tempCounter = 0;
+    bool found = false;
     for (int i = 0; i < this->size; i++)
     {
-        if (this->set[i] != rhSet.set[i])
+        found = false;
+        for (int j = 0; j < rhSet.size; j++)
+        {
+            if (this->set[i] == rhSet.set[j])
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
         {
             temp[tempCounter] = this->set[i];
+            tempCounter++;
         }
     }
 
-    delete[] this->set; // free previously allocated memory
-    this->set = temp;
-    this->size = this->size - rhSet.size;
+    delete[] this->set;
+    this->set = new int[tempCounter];
+    for (int i = 0; i < tempCounter; i++)
+    {
+        this->set[i] = temp[i];
+    }
+    this->size = tempCounter;
+
+    delete[] temp;
 
     return *this;
 }

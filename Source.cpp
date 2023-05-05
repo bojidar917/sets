@@ -4,27 +4,43 @@
 
 int main()
 {
-    int *arrSet1 = new int[3]{1, 2, 3};
-    int *arrSet2 = new int[3]{5, 6, 7};
-
-    Set set1(arrSet1, 3);
-    Set set2(arrSet2, 3);
+    Set set1;
+    set1.setRange(1, 4);
+    Set set2;
+    set2.setRange(5, 8);
     Set set3 = set1 + set2;
+    Set set4;
+    set4.setRange(3, 7);
+    // set1 -= set4;
+    Set set5 = set1 - set4;
 
-    set1 += set2;
+    // working
+    std::cout << "printing set5..." << std::endl;
+    set5.print();
 
-    std::cout << "printing set1 += set2..." << std::endl;
-    set1.print();
+    // working
+    // std::cout << "printing set1 -= set4..." << std::endl;
+    // set1.print();
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "printing set1+set2..." << std::endl;
-    (set1 + set2).print();
+    // working
+    //  set1 += set2;
 
-    std::cout << std::endl;
+    // std::cout << "printing set1 += set2..." << std::endl;
+    // set1.print();
 
-    std::cout << "printing set3 = set1 + set2..." << std::endl;
-    set3.print();
+    // std::cout << std::endl;
+
+    // working
+    //  std::cout << "printing set1+set2..." << std::endl;
+    //  (set1 + set2).print();
+
+    // std::cout << std::endl;
+
+    // working
+    //  std::cout << "printing set3 = set1 + set2..." << std::endl;
+    //  set3.print();
 
     std::cout << std::endl;
 
