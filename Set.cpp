@@ -161,8 +161,40 @@ Set &Set::operator-=(const Set &rhSet)
 
 Set &Set::operator+=(const int element)
 {
+    // Check if the element is already in the set
+    for (int i = 0; i < size; i++)
+    {
+        if (set[i] == element)
+        {
+            return *this;
+        }
+    }
 
-    // TODO: insert return statement here
+    int *temp = new int[size + 1];
+
+    int insert_pos = 0;
+    while (insert_pos < size && set[insert_pos] < element)
+    {
+        insert_pos++;
+    }
+
+    for (int i = 0; i < insert_pos; i++)
+    {
+        temp[i] = set[i];
+    }
+
+    temp[insert_pos] = element;
+
+    for (int i = insert_pos + 1; i < size + 1; i++)
+    {
+        temp[i] = set[i - 1];
+    }
+
+    delete[] this->set;
+    this->set = temp;
+    this->size += 1;
+
+    return *this;
 }
 
 Set &Set::operator-=(const int element)
