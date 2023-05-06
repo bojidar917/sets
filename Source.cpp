@@ -49,3 +49,9 @@ int main()
     // std::cout << "printing set3 = set1 + set2 + something else..." << std::endl;
     // set3.print();
 }
+
+// TODO: set has never been created in the copy ctor -> done
+// TODO: move ctor always with move operator=
+// TODO: when we use rhSet we have access to the private members
+// TODO: int const *getSet() const { return set; } when we have getters to * we need const before the pointer so no one can modify it
+// TODO: int getSize() const{ return size; } we need always const function on the getters

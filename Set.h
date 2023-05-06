@@ -6,13 +6,14 @@ public:
     Set(const Set &other);
     Set &operator=(const Set &other);
     Set(Set &&other);
+    Set &operator=(Set &&other);
     ~Set();
 
     void setRange(int start, int end);
 
-    int *getSet() const { return set; }
-    int getSize() { return size; }
-    unsigned getCapacity() { return capacity; }
+    int const *getSet() const { return set; }
+    int getSize() const { return size; }
+    unsigned getCapacity() const { return capacity; }
 
     void setSet(int *set);
 
