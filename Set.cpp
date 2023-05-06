@@ -6,12 +6,9 @@ Set::Set()
 {
 }
 
-Set::Set(const Set &other)
+Set::Set(const Set &other) : size(other.size), capacity(other.capacity), set(new int[other.capacity])
 {
-    this->set = new int[other.size];
-    this->set = other.set;
-    this->capacity = other.capacity;
-    for (int i = 0; i < other.size; i++)
+    for (int i = 0; i < size; i++)
     {
         set[i] = other.set[i];
     }
@@ -87,6 +84,7 @@ void Set::setSet(int *set)
         this->set = set;
 }
 
+// TODO: maybe the copy constructor doesn't work
 Set Set::operator+(const Set &rhSet) const
 {
     Set newSet(*this);
@@ -161,19 +159,51 @@ Set &Set::operator-=(const Set &rhSet)
     return *this;
 }
 
+Set &Set::operator+=(const int element)
+{
+
+    // TODO: insert return statement here
+}
+
+Set &Set::operator-=(const int element)
+{
+    // TODO: insert return statement here
+}
+
 int Set::operator[](const size_t index) const
 {
     return this->set[index];
 }
 
+// TODO: compare with volume
 bool Set::operator>(const Set &set) const
 {
+    if (this->size > set.size)
+        return true;
+
     return false;
 }
 
+bool Set::operator=(const Set &set) const
+{
+    if (this->size == set.size)
+        return true;
+
+    return false;
+}
+
+bool Set::operator<(const Set &set) const
+{
+    if (this->size < set.size)
+        return true;
+
+    return false;
+}
+
+// TODO: if it is under set
 bool Set::operator==(const Set &rhSet) const
 {
-    if (this->size == rhSet.size)
+    if (*this = rhSet)
     {
         for (int i = 0; i < size; i++)
         {
@@ -183,6 +213,34 @@ bool Set::operator==(const Set &rhSet) const
     }
     else
         return false;
+
+    return true;
+}
+
+bool Set::operator!=(const Set &rhSet) const
+{
+    if (!(*this == rhSet))
+        return true;
+
+    return false;
+}
+
+bool Set::operator<<(const Set &rhSet) const
+{
+    bool areDif = false;
+    for (int i = 0; i < rhSet.size; i++)
+    {
+        for (int j = 0; j < this->size; j++)
+        {
+            if (rhSet[i] == set[j])
+            {
+                areDif = true;
+                break;
+            }
+        }
+        if (!areDif)
+            return false;
+    }
 
     return true;
 }

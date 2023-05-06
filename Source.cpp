@@ -13,10 +13,25 @@ int main()
     set4.setRange(3, 7);
     // set1 -= set4;
     Set set5 = set1 - set4;
+    Set set6;
+
+    set6 = set4 + set5;
+
+    Set comp1;
+    comp1.setRange(7, 10);
+    Set comp2;
+    comp2.setRange(1, 6);
+
+    std::cout << "printing if comp1 and comp2 are equal..." << std::endl;
+    std::cout << std::boolalpha << (comp1 << comp2) << std::endl;
 
     // working
-    std::cout << "printing set5..." << std::endl;
-    set5.print();
+    // std::cout << "printing set5..." << std::endl;
+    // set5.print();
+
+    // working
+    // std::cout << "printing set6 = set4 + set5" << std::endl;
+    // set6.print();
 
     // working
     // std::cout << "printing set1 -= set4..." << std::endl;

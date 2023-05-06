@@ -20,10 +20,18 @@ public:
     Set operator+(const Set &rhSet) const;
     Set operator-(const Set &rhSet) const;
     Set &operator+=(const Set &rhSet); // return this at the end
-    Set &operator-=(const Set &rhSet); // again return this at the end
+    Set &operator-=(const Set &rhSet); // this divides two sets
+
+    Set &operator+=(const int element); // this adds new element to the set
+    Set &operator-=(const int element); // this removes element from the set
+
     int operator[](const size_t index) const;
     bool operator>(const Set &set) const;
+    bool operator=(const Set &set) const;
+    bool operator<(const Set &set) const;
     bool operator==(const Set &rhSet) const;
+    bool operator!=(const Set &rhSet) const;
+    bool operator<<(const Set &rhSet) const;
 
     void print() const;
 
