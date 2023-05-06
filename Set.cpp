@@ -8,6 +8,7 @@ Set::Set()
 
 Set::Set(const Set &other)
 {
+    this->set = new int[other.size];
     this->set = other.set;
     this->capacity = other.capacity;
     for (int i = 0; i < other.size; i++)
@@ -44,6 +45,24 @@ Set::Set(Set &&other)
     other.set = nullptr;
 }
 
+// move operator=
+Set &Set::operator=(Set &&other)
+{
+    if (this != &other)
+    {
+        delete[] this->set;
+
+        this->size = other.size;
+        this->capacity = other.capacity;
+        this->set = other.set;
+
+        other.size = 0;
+        other.capacity = 0;
+        other.set = nullptr;
+    }
+    return *this;
+}
+
 Set::~Set()
 {
     destroy();
@@ -70,8 +89,7 @@ void Set::setSet(int *set)
 
 Set Set::operator+(const Set &rhSet) const
 {
-    Set newSet;
-    newSet += *this;
+    Set newSet(*this);
     newSet += rhSet;
     return newSet;
 }
@@ -85,7 +103,7 @@ Set &Set::operator+=(const Set &rhSet)
     }
 
     int thisSizeCnt = this->size;
-    int *rhSetArr = rhSet.getSet();
+    int *rhSetArr = rhSet.set;
     for (int i = 0; i < rhSet.size; i++)
     {
         temp[thisSizeCnt] = rhSetArr[i];
@@ -101,8 +119,7 @@ Set &Set::operator+=(const Set &rhSet)
 
 Set Set::operator-(const Set &rhSet) const
 {
-    Set newSet;
-    newSet += *this;
+    Set newSet(*this);
     newSet -= rhSet;
     return newSet;
 }
@@ -156,7 +173,18 @@ bool Set::operator>(const Set &set) const
 
 bool Set::operator==(const Set &rhSet) const
 {
-    return false;
+    if (this->size == rhSet.size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (this->set[i] != rhSet.set[i])
+                return false;
+        }
+    }
+    else
+        return false;
+
+    return true;
 }
 
 void Set::print() const
