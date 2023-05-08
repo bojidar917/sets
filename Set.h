@@ -44,6 +44,7 @@ private:
     void setSize(int size);
     void setCapacity(int capacity);
     void resize();
+    bool checkElement(const int element) const;
 
     void destroy();
 };

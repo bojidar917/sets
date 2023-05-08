@@ -162,13 +162,8 @@ Set &Set::operator-=(const Set &rhSet)
 Set &Set::operator+=(const int element)
 {
     // Check if the element is already in the set
-    for (int i = 0; i < size; i++)
-    {
-        if (set[i] == element)
-        {
-            return *this;
-        }
-    }
+    if (checkElement(element))
+        return *this;
 
     int *temp = new int[size + 1];
 
@@ -199,7 +194,23 @@ Set &Set::operator+=(const int element)
 
 Set &Set::operator-=(const int element)
 {
-    // TODO: insert return statement here
+    // Check if the element is not in the set
+    if (!checkElement(element))
+        return *this;
+
+    int *temp = new int[size - 1];
+
+    for (int i = 0; i < size; i++)
+    {
+        if (set[i] != element)
+            temp[i] = set[i];
+    }
+
+    delete[] this->set;
+    this->set = temp;
+    this->size += 1;
+
+    return *this;
 }
 
 int Set::operator[](const size_t index) const
@@ -319,6 +330,20 @@ void Set::resize()
 
     delete[] set;
     set = newArr;
+}
+
+bool Set::checkElement(const int element) const
+{
+    // Check if the element is already in the set
+    for (int i = 0; i < size; i++)
+    {
+        if (set[i] == element)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void Set::destroy()
